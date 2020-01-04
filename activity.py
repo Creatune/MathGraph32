@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import commands
+import subprocess
 import sys
 import platform
 import gi
@@ -140,7 +140,7 @@ class MathGraph32Start(activity.Activity):
            box_java_found = Gtk.VBox(False, 0)
            label_version_info_title = Gtk.Label('<b>' + _("Java version found:") + '</b>')
            label_version_info_title.set_use_markup(True)
-           version_information = commands.getoutput(self.java_path + " -version")
+           version_information = subprocess.getoutput(self.java_path + " -version")
            label_version_info = Gtk.Label(version_information)
            label_version_info.set_justify(Gtk.Justification.CENTER)
            box_java_found.add(label_version_info_title)
@@ -167,7 +167,7 @@ class MathGraph32Start(activity.Activity):
         f = open(script_path, 'w')
         f.write(script_text)
         f.close()
-        os.chmod(script_path, 0755)
+        os.chmod(script_path, 0o755)
 
     def add_buttons(self, box_canvas):
         """Add the buttons at the bottom of the page"""
